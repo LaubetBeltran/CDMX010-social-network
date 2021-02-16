@@ -4,9 +4,8 @@ import { loginVisibility } from "./loginVisibility.js"
 import { openModal, closeModal } from "./modal.js"
 import { loginGithub } from "./loginGithub.js";
 import { onNavigate, getRouter } from "./routing.js";
-import { navLinkVisibilityLogin } from "./NavdisplayVisibilityFunctions.js";
 import { ErrorLoginMail } from "./modalError.js"
-import { uploadImage } from "./home.js"
+import { uploadImage } from "./updateInfoUser.js"
 
 export const login =
 `<div class="container-login">

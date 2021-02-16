@@ -1,4 +1,4 @@
-import { home } from './home.js';
+import { home, loadHome } from './home.js';
 import { login, loginWithMail } from './login.js';
 import { createPost, perfil, reloadPost } from './perfil.js';
 import { account, createAccount } from './account.js';
@@ -41,6 +41,7 @@ export const onNavigate = (pathname) => {
     } else if(routes[pathname] == home) {
         navLinkVisibilityLogin();
         console.log('Home');
+        loadHome();
         
     }else if(routes[pathname] == perfil) {
         console.log('Perfil');
