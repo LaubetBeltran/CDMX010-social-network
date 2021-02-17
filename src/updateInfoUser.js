@@ -1,4 +1,28 @@
 //Función para que el usuario pueda subir una imagén a su perfil
+export var profileImageSrc="./images/avatarProfile.png";
+
+export let imgProfile= ()=>{
+    var user= auth.currentUser;
+    console.log(user);
+    let profileImage= document.getElementById('profileImage');
+            profileImageSrc= user.photoURL;
+            console.log(profileImageSrc);
+            profileImage.setAttribute("src", profileImageSrc);
+}
+/*export const profileInfo= ()=>{
+    auth.onAuthStatedChanged((user)=>{
+        if (user){
+            profileImageSrc= user.photoURL;
+            console.log(profileImageSrc);
+            return profileImageSrc;
+        }else{
+            profileImageSrc="./images/user.png";
+            console.log(profileImageSrc);
+            return profileImageSrc;
+        }
+    })
+}*/
+
 
 export const uploadImage = function () {
     var user= auth.currentUser;
@@ -22,11 +46,13 @@ export const uploadImage = function () {
             console.log(error)
             //Función cuando no exista un error y si se ejecute la acción
         }, function() {
-            console.log('Archivo subido a Firebase')
+            console.log('Archivo subido a Firebase');
             var downloadURL = uploadTask.snapshot.downloadURL;
             user.updateProfile({
                 photoURL: downloadURL
-            })
+            });
+            
+            
         })        
     }    
 }

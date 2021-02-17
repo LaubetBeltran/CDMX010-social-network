@@ -1,4 +1,4 @@
-import { uploadImage } from "./updateInfoUser.js";
+import { profileImageSrc, uploadImage } from "./updateInfoUser.js";
 
 export const home =
 `<div class="flex-container">
@@ -16,9 +16,11 @@ export const home =
     <div class="flex-perfil">
         <div class="container-home">
             <div class="imgContainer-home">
-                <input type="file" id="my-file" style="display-none"></input>
-                <button id="changeImage">Change File</button>
-                <img src="./images/user.png" class="image-home">                
+                <div id="editImgProfile">
+                    <input  type="file" id="my-file" style="display-none"></input>
+                    <button id="changeImage">Change File</button>
+                </div>
+                <img id="profileImage" src="${profileImageSrc}" class="image-home">                
                 <div class="info-home">
                     <div class="userName">Nombre de usuario</div>
                     <div class="about">Información sobre el usuario</div>
@@ -61,6 +63,7 @@ export const home =
 
 export const loadHome= ()=>{
     document.getElementById('changeImage').addEventListener('click', uploadImage);
+    document.getElementById("editImgProfile").style.display='none';
 }
 
 

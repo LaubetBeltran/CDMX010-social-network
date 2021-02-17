@@ -69,7 +69,6 @@ export const loginWithMail = () => {
                 .signInWithEmailAndPassword(loginMail, loginPassword)
                 .then(userCredential => {
                     console.log('inicio de sesión');                    
-                    //navLinkVisibilityLogin();
                     onNavigate('/home');
                     uploadImage()
                 })   

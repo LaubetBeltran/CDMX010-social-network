@@ -1,7 +1,7 @@
 export const templatePost= (postsData) => {
     let postStructur= `<div class="activity">        
     <img src="./images/points.jpg" class="point">
-    <div class="name">Nombre del usuario</div>
+    <div class="name">${postsData.usermail}</div>
     <div class="publication">${postsData.post}</div>
         <div class="interaction">
             <div>

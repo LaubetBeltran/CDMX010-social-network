@@ -1,4 +1,5 @@
 import { templatePost } from "./templatePost.js";
+import { profileImageSrc } from "./updateInfoUser.js";
 
 export const perfil =
 `<div class="flex-container">
@@ -16,8 +17,8 @@ export const perfil =
     <div class="flex-perfil">
         <div class="container">
             <div class="imgContainer">
-                <img src="./images/user.png" class="image">
-                <div class="info">
+                <img id="profileImage" src="${profileImageSrc}" class="image">
+                <div class="info" id="infoContainer">
                     <div class="userName">Nombre de usuario</div>
                     <div class="about">Información sobre el usuario</div>
                 </div>
@@ -42,9 +43,11 @@ export const perfil =
 </div>`
 
 //ENVIAR LA INFORMACIÓN OBTENIDA AL FIREBASE
-const savePost= (post)=>{
+const savePost= (post, usermail, uid)=>{
     firestore.collection('posts').doc().set({
-        post
+        post,
+        usermail,
+        uid
     });
     
 }
@@ -75,8 +78,8 @@ export const createPost = ()=>{
         console.log('Publicar');
         let newPostText=newPostInput.value;
         console.log(newPostText);
-
-        await savePost(newPostText);
+        let user= auth.currentUser;
+        await savePost(newPostText, user.email, user.uid);
 
         document.getElementById('newPostPerfil').value='';
         //newPostInput.reset();
