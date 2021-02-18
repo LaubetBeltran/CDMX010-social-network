@@ -44,10 +44,15 @@ export const login =
     </div>
 </div>`
 
+
+
+const getNameUserColecction =(id)=> firestore.collection('procfile').doc(id).get();
+
+
+
 export const loginWithMail = () => {   
 
     let singupForm = document.getElementById('input-section-login');
-   
     singupForm.addEventListener('submit', (e) => {
         e.preventDefault();
     });
@@ -59,7 +64,7 @@ export const loginWithMail = () => {
     //Se asigna el evento 'click' al botón de LOGIN//
     let submitAccountButton = document.getElementById('login-mail-button');
 
-        submitAccountButton.addEventListener ('click', () => {
+        submitAccountButton.addEventListener ('click',() => {
             //se obtienen los valores de los INPUTS//
             let loginMail=document.getElementById('login-mail-input').value;
             let loginPassword= document.getElementById('login-password-input').value;
@@ -68,9 +73,12 @@ export const loginWithMail = () => {
             //Se llama la variable 'auth' para aplicar los métodos de Firebase//
             auth
                 .signInWithEmailAndPassword(loginMail, loginPassword)
-                .then(userCredential => {
+                .then( async (userCredential) => {
                     console.log('inicio de sesión');                    
                     onNavigate('/home');
+                    const procfileUser= await getNameUserColecction(loginMail);
+                    console.log(procfileUser.data());
+                    console.log(loginMail);
                 })   
                 .catch((error)=> {                   
                     openModal(ErrorLoginMail);
@@ -88,3 +96,4 @@ export const loginWithMail = () => {
     //GITHUB LOGIN
     loginGithub();
 };
+

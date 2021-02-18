@@ -19,6 +19,7 @@ const rootDiv = document.getElementById('root');
 export function getRouter(linkId,PathName) {
     linkId.addEventListener('click', () => {
         onNavigate(PathName); return false;
+        
     })
     }
 
@@ -28,7 +29,7 @@ export const onNavigate = (pathname) => {
         {},
         pathname,
         window.location.origin + pathname
-    )
+    );
     rootDiv.innerHTML= routes[pathname];
     if (pathname=='/') {
         console.log('Ingresar')

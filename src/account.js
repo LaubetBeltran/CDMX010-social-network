@@ -61,6 +61,7 @@ export const createAccount = () => {
             let inputConfirmPassword = document.getElementById('A-input-password-confirm').value;
             let nameUser = document.getElementById('A-input-nameUser').value;
             let aboutUser = document.getElementById('A-input-aboutme').value;
+            let procfileImgDefault = "./images/avatarProfile.png"
 
             document.getElementById('A-error-password').style.display='none';
             document.getElementById('A-error-confirmPassworrd').style.display='none';
@@ -68,9 +69,28 @@ export const createAccount = () => {
             if (nameUser!='' && createPassword.length >= 8){
                 if(createPassword == inputConfirmPassword){
                     //Se llama la variable 'auth' para aplicar los métodos de Firebase
-                    auth
-                    .createUserWithEmailAndPassword(newMail, createPassword)
-                    .then(userCredential => {                    
+                    //auth
+                    //.createUserWithEmailAndPassword(newMail, createPassword);
+                    admin
+                    .auth()
+                    .createUser({
+                        email: newMail,
+                        emailVerified: false,
+                        password: createPassword,
+                        displayName: nameUser,
+                        photoURL: './images/avatarProfile.png',
+                        aboutUser: aboutUser,
+                        disabled: false,
+                        })
+                    .then((userRecord) => {
+                        // See the UserRecord reference doc for the contents of userRecord.
+                            console.log('Successfully created new user:', userRecord.uid);
+                    })
+                    .catch((error) => {
+                        openModal(ErrorAccount);
+                            console.log('Error creating new user:', error);
+                    });
+                    /*.then(userCredential => {                    
                         openModal(SuccessAccount);
                         onNavigate('/');
                         console.log(userCredential);
@@ -80,7 +100,7 @@ export const createAccount = () => {
                     })
                     .catch(userCredential => {                    
                         openModal(ErrorAccount);
-                    })
+                    })*/
                 }else{                    
                     document.getElementById('A-error-confirmPassworrd').style.display='block';
                 } 
