@@ -1,6 +1,5 @@
 //import { getInfoUser } from "./userColection.js";
-const getNameUser = ()=> {firestore.collection('procfile').get();}
-console.log(getNameUser);
+const getNameUserColecction =(id)=> firestore.collection('procfile').doc(id).get();
 
 export const onAuthDataUser= ()=>{
     auth.onAuthStateChanged(async (userAuth) =>{
@@ -9,9 +8,8 @@ export const onAuthDataUser= ()=>{
             let userEmail= user.email;
             console.log(userEmail);
             document.getElementById('p-userName').innerHTML= userEmail;
-            const procfileUser= await getNameUser(userEmail);
-                    console.log(procfileUser.data());
-                    //console.log(userEmail);
+            //const procfileUser= await getNameUserColecction(userEmail);
+                    //console.log(procfileUser.data());
         }else{
             console.log('sesión no iniciada');
         }

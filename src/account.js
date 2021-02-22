@@ -77,6 +77,18 @@ export const createAccount = () => {
                         let uidUser= userCredential.user.uid;
                         console.log(uidUser);
                         saveInfoUser(newMail, uidUser, createPassword, nameUser, aboutUser, 'urlimg');
+                        var user = firebase.auth().currentUser;
+                        user.updateProfile({
+                            displayName: nameUser,
+                            aboutUser: aboutUser,
+                            //photoURL: "https://example.com/jane-q-user/profile.jpg"
+                            }).then(function() {
+                            console.log('Update successful.', userCredential.user)
+                            }).catch(function(error) {
+                            console.log('An error happened.')
+                            });
+
+
                     })
                     .catch(userCredential => {                    
                         // console.log('Usuario sin registro');
