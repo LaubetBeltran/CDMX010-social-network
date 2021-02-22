@@ -1,6 +1,5 @@
 //OBTENER LA INFORMACIÓN DESDE FIREBASE
-export const getInfoUser=(usermail)=>{ firestore.collection('procfile').doc(usermail).get();
-}
+export const getInfoUser=(usermail)=> firestore.collection('procfile').doc(usermail).get()
 //const querySnapshot =getInfoUser();
 //console.log(querySnapshot);
 
